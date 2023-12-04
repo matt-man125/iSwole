@@ -48,7 +48,10 @@ FONTS:
   a {
     text-decoration: none;
   }
-
+  hr {
+    color: #DDDDDD;
+    margin: 20px 0px;
+  }
 
 header {
     width: 100vw;
@@ -79,4 +82,40 @@ header {
     flex: 4;
     flex-grow: 1;
     padding: 0px 15px;
+}
+
+.pageGeneral {
+    padding: 15px;
+}
+.containerLR {
+    overflow: auto;
+    padding: 0px 10px;
+}
+.left {
+    float: left;
+    width: 70%;
+}
+.right {
+    float: left;
+    width: 30%;
+    text-align: right;
+}
+
+.mainText {
+    font-family: var(--secFont);
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.secText {
+    font-family: var(--terFont);
+    color: var(--blackish);
+    font-weight: bold;
+    font-size: 18px;
+}
+.secsecText {
+    font-family: var(--terFont);
+    color: black;
+    font-size: 18px;
 }
