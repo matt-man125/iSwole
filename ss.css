@@ -50,12 +50,13 @@ FONTS:
   }
 
 
-.header {
+header {
     width: 100vw;
     height: 7%;
     display: flex;
+    gap: 10px;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
 }
 .imgLogo {
     flex: 1;
@@ -64,12 +65,18 @@ FONTS:
     flex: 2;
     font-family: var(--priFont);
     color: black;
+    font-size: 40px;
 }
 .headerSec {
     flex: 3;
+    flex-grow: 4;
     font-family: var(--secFont);
     color: var(--blackish);
+    font-size: 20px;
+    height: 15px;
 }
 .imgBurger {
     flex: 4;
+    flex-grow: 1;
+    padding: 0px 15px;
 }
