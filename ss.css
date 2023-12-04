@@ -1,0 +1,75 @@
+/*
+FONTS:
+  font-family: 'Pragati Narrow', sans-serif;
+  font-family: 'Open Sans Condensed', sans-serif;
+
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Koulen&display=swap');
+
+/* VARIABLES ------------------------------------------------------------------------------------------------------------------------- */
+:root {
+    --priFont: 'Koulen', sans-serif;
+    --secFont: 'Atkinson Hyperlegible', sans-serif;
+    --terFont: 'Bai Jamjuree', sans-serif;
+  
+    --whiteish: #EDEDED;
+    --blackish: #4E4E4E;
+
+    --primFir: #49828A;
+    --primSec: #04353C;
+    --SecFir: #F4A259;
+    --SecSec: #F6C395;
+  
+  }
+  ::-moz-selection {
+    background: #31a7da50;
+  }
+  ::selection {
+    background: #31a7da50;
+  }
+  
+  /* STANDARD ------------------------------------------------------------------------------------------------------------------------- */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: hotpink;
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+  }
+  html, body {
+    width: 100vw;
+    scroll-behavior: smooth;
+  }
+  a {
+    text-decoration: none;
+  }
+
+
+.header {
+    width: 100vw;
+    height: 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.imgLogo {
+    flex: 1;
+}
+.headerPri {
+    flex: 2;
+    font-family: var(--priFont);
+    color: black;
+}
+.headerSec {
+    flex: 3;
+    font-family: var(--secFont);
+    color: var(--blackish);
+}
+.imgBurger {
+    flex: 4;
+}
