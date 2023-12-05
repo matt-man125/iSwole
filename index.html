@@ -11,7 +11,7 @@ TODO:
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <title>iSwole - Home</title>
+    <title>iSwole - Progress</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="ss.css" type="text/css">
@@ -19,36 +19,51 @@ TODO:
     <script src="include.js" type="text/javascript"></script>
 </head>
   <body>
-    <header>
-        <div class="imgLogo"><img src="img/logo.png" onclick="redirect('index.html')" alt="logo img here"></div>
-        <div class="headerPri">iSwole</div>
-        <div class="headerSec">Progress</div>
-        <div class="imgBurger"><img src="img/burger.png" onclick="toggleSidebar()" alt="menu icon here"></div>
-    </header>
-    <div class="pageGeneral">
-      <div class="mainText">Info:</div>
+    <header id="header"></header>
+    <div class="pageGeneral" id="pageGeneral">
+      <h1>Info:</h1>
       <div class="containerLR">
-        <div class="secText left">Current Body Weight (lbs):</div>
-        <div class="secsecText right">125 lbs</div>
+        <h2 class="left">Current Body Weight (lbs):</h2>
+        <h3 class="right">125 lbs</h3>
       </div> <hr>
       <div class="containerLR">
-        <div class="secText left">Average Workout Time:</div>
-        <div class="secsecText right">172 mins</div>
+        <h2 class="left">Average Workout Time:</h2>
+        <h3 class="right">172 mins</h3>
       </div> <hr>
       <div class="containerLR">
-        <div class="secText left">Average Workouts per Week:</div>
-        <div class="secsecText right">1234</div>
+        <h2 class="left">Average Workouts per Week:</h2>
+        <h3 class="right">4 per week</h3>
       </div> <hr>
-      <div class="mainText">View:</div>
+      <h1>View:</h1>
       <div class="containerLR">
-        <div class="secText left">Max Weight:</div>
-        <div class="secsecText right">1234</div>
+        <h2 class="left">Max Weight:</h2>
+        <h3 class="right">200 lbs</h3>
       </div> <hr>
       <div class="containerLR">
-        <div class="secText left">Average Sets and Reps:</div>
-        <div class="secsecText right">1234</div>
+        <h2 class="left">Average Sets and Reps:</h2>
+        <h3 class="right">5 x 12</h3>
       </div>
     </div>
+    <nav = id="sidebar">
+      <div class="imgBurger"><img src="img/burger.png" onclick="toggleSidebar()" alt="menu icon here"></div>
+      <section>
+        <h1 onclick="redirect('index.html')">
+          <span><img src="img/progressIcon.png"></span>
+          Progress
+        </h1>
+        <h1 onclick="redirect('log.html')">
+          <span><img src="img/logIcon.png"></span>
+          Log Session
+        </h1>
+        <h1 onclick="redirect('learn.html')">
+          <span><img src="img/learningIcon.png"></span>
+          Learning
+        </h1>
+      </section>
+      <h2 class="fireNum">27 day streak!</h2>
+      <img src="img/lineOfFire.png" onclick="toggleSidebar()" alt="menu icon here">
+    </nav>
   </body>
 </html>
 
+<script>createHeader('Progress');</script>

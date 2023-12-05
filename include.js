@@ -1,8 +1,11 @@
-function createHeader() {
-    const header = document.createElement('header');
+function createHeader(page) {
+    const header = document.getElementById('header');
     header.innerHTML = 
     `
-
+    <div class="imgLogo"><img src="img/logo.png" onclick="redirect('index.html')" alt="logo img here"></div>
+    <div class="headerPri" onclick="redirect('index.html')">iSwole</div>
+    <div class="headerSec">${page}</div>
+    <div class="imgBurger"><img src="img/burger.png" onclick="toggleSidebar()" alt="menu icon here"></div>
     `
 }
 
@@ -12,13 +15,10 @@ function redirect(url) {
 
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
-    const menuToggle = document.getElementById('menu-toggle');
+    const pageGeneral = document.getElementById('pageGeneral');
+    sidebar.classList.toggle('active');
+    pageGeneral.classList.toggle('active');
 
-    if (sidebar.style.left === '0px') {
-        sidebar.style.left = '-250px';
-        menuToggle.innerHTML = '&#9776; Menu';
-    } else {
-        sidebar.style.left = '0px';
-        menuToggle.innerHTML = '&#10006; Close';
-    }
 }
+
+createHeader();
