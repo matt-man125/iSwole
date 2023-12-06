@@ -37,18 +37,23 @@ const exportedMethods = {
       exerciseName0: exerciseName0,
       sets0: sets0,
       reps0: reps0,
+      weight0: weight0,
       exerciseName1: exerciseName1,
       sets1: sets1,
       reps1: reps1,
+      weight1: weight1,
       exerciseName2: exerciseName2,
       sets2: sets2,
       reps2: reps2,
+      weighth2: weight2,
       exerciseName3: exerciseName3,
       sets3: sets3,
       reps3: reps3,
+      weight3: weight3,
       exerciseName4: exerciseName4,
       sets4: sets4,
-      reps4: reps4
+      reps4: reps4,
+      weight4: weight4
     };
     const logCollection = await logs();
     const insertInfo = await logCollection.insertOne(newLog);
