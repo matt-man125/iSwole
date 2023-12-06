@@ -1,0 +1,79 @@
+<!--
+
+NOTES:
+  - Meant to be viewed in iPhone 14 Pro mode on Chrome
+
+TODO:
+  - 
+
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>iSwole - Progress</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="ss.css" type="text/css">
+    <link rel="stylesheet" href="ssAni.css" type="text/css">
+    <script src="include.js" type="text/javascript"></script>
+</head>
+  <body>
+    <header id="header"></header>
+    <div class="pageGeneral" id="pageGeneral">
+      <h1>Info:</h1>
+      <div class="containerLR">
+        <h2 class="left">Current Body Weight (lbs):</h2>
+        <h3 class="right">125 lbs</h3>
+      </div> <hr>
+      <div class="containerLR">
+        <h2 class="left">Average Workout Time:</h2>
+        <h3 class="right">172 mins</h3>
+      </div> <hr>
+      <div class="containerLR">
+        <h2 class="left">Average Workouts per Week:</h2>
+        <h3 class="right">4 per week</h3>
+      </div> <hr>
+      <div class="containerLR">
+        <h1 class="left">View:</h1>
+        <div class="inputDiv right searchFlipper">
+          <select id="exerciseSelect" name="exerciseSelect">
+            <option value="" disabled selected>Select one here</option>
+            <option value="dumbbellPress">Dumbbell Press</option>
+            <option value="dumbbellFly">Dumbbell Fly</option>
+            <option value="shoulderPress">Shoulder Press</option>
+          </select>
+        </div>
+      </div>
+      <div class="containerLR">
+        <h2 class="left">Max Weight:</h2>
+        <h3 class="right">200 lbs</h3>
+      </div> <hr>
+      <div class="containerLR">
+        <h2 class="left">Average Sets and Reps:</h2>
+        <h3 class="right">5 x 12</h3>
+      </div>
+    </div>
+    <nav id="sidebar">
+      <div class="imgBurger"><img src="img/burger.png" onclick="toggleSidebar()" alt="menu icon here"></div>
+      <section>
+        <h1 onclick="redirect('index.html')">
+          <span><img src="img/progressIcon.png"></span>
+          Progress
+        </h1>
+        <h1 onclick="redirect('log.html')">
+          <span><img src="img/logIcon.png"></span>
+          Log Session
+        </h1>
+        <h1 onclick="redirect('learn.html')">
+          <span><img src="img/learningIcon.png"></span>
+          Learning
+        </h1>
+      </section>
+      <h2 class="fireNum">27 day streak!</h2>
+      <img src="img/lineOfFire.png" onclick="toggleSidebar()" alt="menu icon here">
+    </nav>
+  </body>
+</html>
+
+<script>createHeader('Progress');</script>
