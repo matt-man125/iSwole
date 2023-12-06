@@ -16,7 +16,10 @@ router
     }catch(e){
       res.status(500).json({error: e});
     }
-  })
+  });
+
+router
+  .route('/submit')
   .post(async (req, res) => {
     const myLogData = req.body;
     try{
