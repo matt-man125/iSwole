@@ -34,7 +34,17 @@ TODO:
         <h2 class="left">Average Workouts per Week:</h2>
         <h3 class="right">4 per week</h3>
       </div> <hr>
-      <h1>View:</h1>
+      <div class="containerLR">
+        <h1 class="left">View:</h1>
+        <div class="inputDiv right searchFlipper">
+          <select id="exerciseSelect" name="exerciseSelect">
+            <option value="" disabled selected>Select one here</option>
+            <option value="dumbbellPress">Dumbbell Press</option>
+            <option value="dumbbellFly">Dumbbell Fly</option>
+            <option value="shoulderPress">Shoulder Press</option>
+          </select>
+        </div>
+      </div>
       <div class="containerLR">
         <h2 class="left">Max Weight:</h2>
         <h3 class="right">200 lbs</h3>
@@ -44,7 +54,7 @@ TODO:
         <h3 class="right">5 x 12</h3>
       </div>
     </div>
-    <nav = id="sidebar">
+    <nav id="sidebar">
       <div class="imgBurger"><img src="img/burger.png" onclick="toggleSidebar()" alt="menu icon here"></div>
       <section>
         <h1 onclick="redirect('index.html')">
