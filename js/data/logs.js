@@ -12,18 +12,23 @@ const exportedMethods = {
     exerciseName0,
     sets0,
     reps0,
+    weight0,
     exerciseName1,
     sets1,
     reps1,
+    weight1,
     exerciseName2,
     sets2,
     reps2,
+    weight2,
     exerciseName3,
     sets3,
     reps3,
+    weight3,
     exerciseName4,
     sets4,
-    reps4
+    reps4,
+    weight4
   ) {
     let newLog = {
       bodyWeight: bodyWeight,
