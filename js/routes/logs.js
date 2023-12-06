@@ -23,8 +23,8 @@ router
   .post(async (req, res) => {
     const myLogData = req.body;
     try{
-      const {bodyWeight, startTime, endTime, exerciseName0, sets0, reps0, exerciseName1, sets1, reps1, exerciseName2, sets2, reps2, exerciseName3, sets3, reps3, exerciseName4, sets4, reps4} = myLogData;
-      const newLog = await logData.create(bodyWeight, startTime, endTime, exerciseName0, sets0, reps0, exerciseName1, sets1, reps1, exerciseName2, sets2, reps2, exerciseName3, sets3, reps3, exerciseName4, sets4, reps4);
+      const {bodyWeight, startTime, endTime, exerciseName0, sets0, reps0, weight0, exerciseName1, sets1, reps1, weight1, exerciseName2, sets2, reps2, weight2, exerciseName3, sets3, reps3, weight3, exerciseName4, sets4, reps4, weight4} = myLogData;
+      const newLog = await logData.create(bodyWeight, startTime, endTime, exerciseName0, sets0, reps0, weight0, exerciseName1, sets1, reps1, weight1, exerciseName2, sets2, reps2, weight2, exerciseName3, sets3, reps3, weight3, exerciseName4, sets4, reps4, weight4);
       res.status(200).json(newLog);
     }catch(e){
       res.status(400).json({error: e});
