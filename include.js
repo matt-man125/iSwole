@@ -9,6 +9,17 @@ function createHeader(page) {
     `
 }
 
+function clearInputs(num) {
+    var selectElement = document.querySelectorAll('select')[num];
+    selectElement.value = "";
+    var numberInput = document.querySelector('input[name="weight'+num+'"]');
+    numberInput.value = "";
+    var numberInput = document.querySelector('input[name="sets'+num+'"]');
+    numberInput.value = "";
+    var numberInput = document.querySelector('input[name="reps'+num+'"]');
+    numberInput.value = "";
+}
+
 function redirect(url) {
     window.location.href = url;
 }
