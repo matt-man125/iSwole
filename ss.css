@@ -314,3 +314,19 @@ header .imgBurger {
 .submitButton:active {
 	background-color: var(--primSec);
 }
+
+.left select {
+	width: 125px;
+}
+
+.searchFlipper span {
+	z-index: 99;
+}
+
+.loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 70px;
+}
