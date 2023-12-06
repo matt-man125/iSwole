@@ -20,6 +20,17 @@ function clearInputs(num) {
     numberInput.value = "";
 }
 
+function clearAllInputs() {
+    for (i = 0; i < 5; i++) clearInputs(i);
+    var numberInput = document.querySelector('input[name="bodyWeight"]');
+    numberInput.value = "";
+    var numberInput = document.querySelector('input[name="startTime"]');
+    numberInput.value = "";
+    var numberInput = document.querySelector('input[name="endTime"]');
+    numberInput.value = "";
+
+}
+
 function redirect(url) {
     window.location.href = url;
 }

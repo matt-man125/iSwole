@@ -118,11 +118,12 @@
       <hr>
       <div class="middler"><button type="submit" class="submitButton">Log Current Session</button></div>
     </form>
+    <div class="middler"><button class="cancelButton" onclick="clearAllInputs();">Cancel</button></div>
   </div>
   <nav id="sidebar">
     <div class="imgBurger"><img src="img/burger.png" onclick="toggleSidebar()" alt="menu icon here"></div>
     <section>
-      <h1 onclick="redirect('index.html')">
+      <h1 onclick="redirect('index.html')" style="font-weight: normal;">
         <span><img src="img/progressIcon.png"></span>
         Progress
       </h1>
@@ -130,13 +131,13 @@
         <span><img src="img/logIcon.png"></span>
         Log Session
       </h1>
-      <h1 onclick="redirect('learn.html')">
+      <h1 onclick="redirect('learn.html')" style="font-weight: normal;">
         <span><img src="img/learningIcon.png"></span>
         Learning
       </h1>
     </section>
     <h2 class="fireNum">27 day streak!</h2>
-    <img src="img/lineOfFire.png" onclick="toggleSidebar()" alt="menu icon here">
+    <img src="img/lineOfFire.png" alt="menu icon here">
   </nav>
 </body>
 
