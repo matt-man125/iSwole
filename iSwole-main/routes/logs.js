@@ -52,6 +52,10 @@ router
         reps4,
         weight4,
       } = myLogData;
+      if (startTime > endTime) {
+        console.log("NO THIS BAD");
+      }
+      throw "error: startTime must be before endTime";
       const newLog = await logData.create(
         bodyWeight,
         startTime,
@@ -82,20 +86,33 @@ router
       let averageWorkoutsPerWeek = await db.getAverageWorkoutsPerWeek();
       res.redirect("progress");
     } catch (e) {
-      res.status(400).json({ error: e });
+      res.status(400).redirect("/error?error=" + e);
     }
   });
 
-router
-  .route("/progress")
-  .get(async (req, res) => {
-    const selectedValue = req.query.value;
-    let logs = await db.getExcerciseData();
-    let curBodyWeight = await db.getCurrentBodyWeight();
-    let averageWorkoutTime = await db.getAverageWorkoutTime();
-    let averageWorkoutsPerWeek = await db.getAverageWorkoutsPerWeek();
-    res.render("progress", {bodyWeight: curBodyWeight, averageWorkoutTime: averageWorkoutTime, averageWorkoutsPerWeek: averageWorkoutsPerWeek});
+router.route("/progress").get(async (req, res) => {
+  let curBodyWeight = await db.getCurrentBodyWeight();
+  let averageWorkoutTime = await db.getAverageWorkoutTime();
+  let averageWorkoutsPerWeek = await db.getAverageWorkoutsPerWeek();
+
+  res.render("progress", {
+    bodyWeight: curBodyWeight,
+    averageWorkoutTime: averageWorkoutTime,
+    averageWorkoutsPerWeek: averageWorkoutsPerWeek,
   });
+});
+
+router.route("/progress/:exercise").get(async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  const selectedValue = req.params.exercise;
+  let data = await db.getExcerciseData(selectedValue);
+  res.json({ max: data.max, avgSet: data.avgSet, avgRep: data.avgRep });
+});
+
+router.route("/error").get(async (req, res) => {
+  const error = req.query.error;
+  res.render("error", { error: error });
+});
 
 router
   .route("/:logId")

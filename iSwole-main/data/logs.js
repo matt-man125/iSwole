@@ -126,7 +126,43 @@ const exportedMethods = {
     return logArr;
   },
 
-  async getCurrentBodyWeight(){
+  async getExcerciseData(arg) {
+    if (!arg) {
+      console.log("Here");
+      return "NA";
+    }
+    let logData = await this.getAll();
+    let max = 0;
+    let avgRep = 0;
+    let avgSet = 0;
+    let count = 0;
+    let exercise = [];
+    for (let i = 0; i < logData.length; i++) {
+      let list = logData[i].exercises;
+      for (let j = 0; j < list.length; j++) {
+        exercise = list[j];
+        if (exercise.exerciseName === arg) {
+          count++;
+          if (exercise.weight > max) {
+            max = exercise.weight;
+          }
+          avgRep += exercise.sets;
+          avgSet += exercise.reps;
+        }
+      }
+    }
+    if (count == 0) {
+      avgSet = 0;
+      avgRep = 0;
+      max = 0;
+    } else {
+      avgSet = avgSet / count;
+      avgRep = avgRep / count;
+    }
+    return { max: max, avgSet: avgSet, avgRep: avgRep };
+  },
+
+  async getCurrentBodyWeight() {
     const logCollection = await logs();
     let logList = await logCollection.find({}).toArray();
     let numLogs = logList.length;
@@ -134,17 +170,20 @@ const exportedMethods = {
     return curWeight;
   },
 
-  async getAverageWorkoutTime(){
+  async getAverageWorkoutTime() {
     const logCollection = await logs();
     let logList = await logCollection.find({}).toArray();
     let numLogs = logList.length;
     let totalWorkoutTime = 0;
-    for (let i = 0; i < numLogs; i++){
+    for (let i = 0; i < numLogs; i++) {
       let curLog = logList[i];
       let curLogStartTime = curLog.info.startTime.slice(11);
       let curLogEndTime = curLog.info.endTime.slice(11);
-      let minuteDifference = parseInt(curLogEndTime.slice(3)) - parseInt(curLogStartTime.slice(3));
-      let hourDifference = parseInt(curLogEndTime.slice(0, 2) - parseInt(curLogStartTime.slice(0, 2)));
+      let minuteDifference =
+        parseInt(curLogEndTime.slice(3)) - parseInt(curLogStartTime.slice(3));
+      let hourDifference = parseInt(
+        curLogEndTime.slice(0, 2) - parseInt(curLogStartTime.slice(0, 2))
+      );
       let hoursToMinutes = hourDifference * 60;
       totalWorkoutTime = totalWorkoutTime + minuteDifference + hoursToMinutes;
     }
@@ -153,7 +192,7 @@ const exportedMethods = {
     return averageWorkoutTime;
   },
 
-  async getAverageWorkoutsPerWeek(){
+  async getAverageWorkoutsPerWeek() {
     const logCollection = await logs();
     let logList = await logCollection.find({}).toArray();
     let numLogs = logList.length;
@@ -163,37 +202,37 @@ const exportedMethods = {
     let latestYear = 0;
     let latestMonth = 0;
     let latestDay = 0;
-    for (let i = 0; i < numLogs; i++){
+    for (let i = 0; i < numLogs; i++) {
       let curLog = logList[i];
       let curLogYear = parseInt(curLog.info.startTime.slice(0, 4));
       let curLogMonth = parseInt(curLog.info.startTime.slice(5, 7));
       let curLogDay = parseInt(curLog.info.startTime.slice(8, 10));
 
-      if (curLogYear < earliestYear){
+      if (curLogYear < earliestYear) {
         earliestYear = curLogYear;
         earliestMonth = curLogMonth;
         earliestDay = curLogDay;
-      } else if (curLogYear == earliestYear){
-        if (curLogMonth < earliestMonth){
+      } else if (curLogYear == earliestYear) {
+        if (curLogMonth < earliestMonth) {
           earliestMonth = curLogMonth;
           earliestDay = curLogDay;
-        } else if (curLogMonth == earliestMonth){
-          if (curLogDay < earliestDay){
+        } else if (curLogMonth == earliestMonth) {
+          if (curLogDay < earliestDay) {
             earliestDay = curLogDay;
           }
         }
       }
 
-      if (curLogYear > latestYear){
+      if (curLogYear > latestYear) {
         latestYear = curLogYear;
         latestMonth = curLogMonth;
         latestDay = curLogDay;
-      } else if (curLogYear == latestYear){
-        if (curLogMonth > latestMonth){
+      } else if (curLogYear == latestYear) {
+        if (curLogMonth > latestMonth) {
           latestMonth = curLogMonth;
           latestDay = curLogDay;
-        } else if (curLogMonth == latestMonth){
-          if (curLogDay > latestDay){
+        } else if (curLogMonth == latestMonth) {
+          if (curLogDay > latestDay) {
             latestDay = curLogDay;
           }
         }

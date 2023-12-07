@@ -11,21 +11,24 @@ async function queryExercises() {
   var selectElement = document.getElementById("exerciseSelect");
   var selectedValue = selectElement.options[selectElement.selectedIndex].value;
   console.log(selectedValue);
-
   try {
-    const response = await fetch(`/progress?value=${selectedValue}`);
+    const response = await fetch(`/progress/${selectedValue}`);
+    console.log(response);
 
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
 
-    console.log(response);
-
     const data = await response.json();
-    console.log(data);
+    let maxweight = document.getElementById("max");
+    maxweight.innerText = data.max + " lbs";
+    let setreps = document.getElementById("setreps");
+    setreps.innerText = data.avgSet + " x " + data.avgRep;
   } catch (error) {
     console.error("Error:", error);
   }
+
+  return;
 }
 
 function clearInputs(num) {
