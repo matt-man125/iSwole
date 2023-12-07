@@ -1,0 +1,20 @@
+{{! This will be your default layout for all handlebars file rendered. This will be inherited by all other templates. }}
+{{! Refer lecture code to learn more on how this works: https://github.com/stevens-cs546-cs554/CS-546/tree/master/lecture_08/code/HTML_Templating }}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/public/js/include.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="/public/css/ss.css" >
+    <link rel="stylesheet" href="../../ssAni.css" type="text/css">
+  </head>
+  <body>
+    <header id="header"></header>
+    <div class="container">
+      {{{body}}}
+    </div>
+  </body>
+</html>
+
