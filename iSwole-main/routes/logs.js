@@ -15,22 +15,14 @@ router.route("/").get(async (req, res) => {
   }
 });
 
-router.route("/log").get(async (req, res) => {
-  try {
-    res.render("log");
-  } catch (e) {
-    console.log("e");
-  }
-});
-
 router
-  .route("/progress")
+  .route("/log")
   .get(async (req, res) => {
-    const selectedValue = req.query.value;
-    let logs = await db.getExcerciseData();
-    let curBodyWeight = await db.getCurrentBodyWeight();
-    let averageWorkoutTime = await db.getAverageWorkoutTime();
-    res.render("progress", {bodyWeight: curBodyWeight, averageWorkoutTime: averageWorkoutTime});
+    try {
+      res.render("log");
+    } catch (e) {
+      console.log("e");
+    }
   })
   .post(async (req, res) => {
     const myLogData = req.body;
@@ -87,10 +79,22 @@ router
       );
       let curBodyWeight = await db.getCurrentBodyWeight();
       let averageWorkoutTime = await db.getAverageWorkoutTime();
-      res.status(200).render("progress", {bodyWeight: curBodyWeight, averageWorkoutTime: averageWorkoutTime});
+      let averageWorkoutsPerWeek = await db.getAverageWorkoutsPerWeek();
+      res.redirect("progress");
     } catch (e) {
       res.status(400).json({ error: e });
     }
+  });
+
+router
+  .route("/progress")
+  .get(async (req, res) => {
+    const selectedValue = req.query.value;
+    let logs = await db.getExcerciseData();
+    let curBodyWeight = await db.getCurrentBodyWeight();
+    let averageWorkoutTime = await db.getAverageWorkoutTime();
+    let averageWorkoutsPerWeek = await db.getAverageWorkoutsPerWeek();
+    res.render("progress", {bodyWeight: curBodyWeight, averageWorkoutTime: averageWorkoutTime, averageWorkoutsPerWeek: averageWorkoutsPerWeek});
   });
 
 router

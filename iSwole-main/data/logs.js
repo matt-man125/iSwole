@@ -152,6 +152,63 @@ const exportedMethods = {
     return averageWorkoutTime;
   },
 
+  async getAverageWorkoutsPerWeek(){
+    const logCollection = await logs();
+    let logList = await logCollection.find({}).toArray();
+    let numLogs = logList.length;
+    let earliestYear = 3000;
+    let earliestMonth = 12;
+    let earliestDay = 31;
+    let latestYear = 0;
+    let latestMonth = 0;
+    let latestDay = 0;
+    for (let i = 0; i < numLogs; i++){
+      let curLog = logList[i];
+      let curLogYear = parseInt(curLog.info.startTime.slice(0, 4));
+      let curLogMonth = parseInt(curLog.info.startTime.slice(5, 7));
+      let curLogDay = parseInt(curLog.info.startTime.slice(8, 10));
+
+      if (curLogYear < earliestYear){
+        earliestYear = curLogYear;
+        earliestMonth = curLogMonth;
+        earliestDay = curLogDay;
+      } else if (curLogYear == earliestYear){
+        if (curLogMonth < earliestMonth){
+          earliestMonth = curLogMonth;
+          earliestDay = curLogDay;
+        } else if (curLogMonth == earliestMonth){
+          if (curLogDay < earliestDay){
+            earliestDay = curLogDay;
+          }
+        }
+      }
+
+      if (curLogYear > latestYear){
+        latestYear = curLogYear;
+        latestMonth = curLogMonth;
+        latestDay = curLogDay;
+      } else if (curLogYear == latestYear){
+        if (curLogMonth > latestMonth){
+          latestMonth = curLogMonth;
+          latestDay = curLogDay;
+        } else if (curLogMonth == latestMonth){
+          if (curLogDay > latestDay){
+            latestDay = curLogDay;
+          }
+        }
+      }
+    }
+    let differenceInYears = latestYear - earliestYear;
+    let differenceInMonths = latestMonth - earliestMonth;
+    let differenceInDays = latestDay - earliestDay;
+    let yearsToWeeks = differenceInYears * 52;
+    let monthsToWeeks = differenceInMonths * 4.33;
+    let daysToWeeks = differenceInDays / 7;
+    let totalWeeks = yearsToWeeks + monthsToWeeks + daysToWeeks;
+    let averageWorkoutsPerWeek = numLogs / totalWeeks;
+    return averageWorkoutsPerWeek;
+  },
+
   async remove(logId) {
     const logCollection = await logs();
     const deletionInfo = await logCollection.findOneAndDelete({
