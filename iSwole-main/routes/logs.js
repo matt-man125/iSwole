@@ -55,7 +55,6 @@ router
       if (startTime > endTime) {
         throw "error: startTime must be before endTime";
       }
-
       const newLog = await logData.create(
         bodyWeight,
         startTime,
