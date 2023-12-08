@@ -1,7 +1,7 @@
 function createHeader(page) {
   const header = document.getElementById("header");
   header.innerHTML = `
-    <div class="imgLogo"><img src="public/img/logo.png" onclick="redirect('index.html')" alt="logo img here"></div>
+    <div class="imgLogo"><img src="public/img/logo.png" onclick="redirect('/progress')" alt="logo img here"></div>
     <div class="headerPri" onclick="redirect('index.html')">iSwole</div>
     <div class="headerSec">${page}</div>
     <div class="imgBurger"><img src="public/img/burger.png" onclick="toggleSidebar()" alt="menu icon here"></div>

@@ -99,38 +99,13 @@ const exportedMethods = {
     }
     return myLog;
   },
-  async getExcerciseData() {
-    const logCollection = await logs();
-    let logArr = await logCollection.find({}).toArray();
-
-    /*
-    const aggregationPipeline = [
-      {
-          $unwind: '$exercises' // Split the array into separate documents
-      },
-      {
-          $group: {
-              _id: '$exercises.name', // Group by the name attribute
-              averageWeight: { $avg: '$exercises.weight' }, // Calculate average weight
-              maxWeight: { $max: '$exercises.weight' }, // Calculate max weight
-              minWeight: { $min: '$exercises.weight' }, // Calculate min weight
-              totalEntries: { $sum: 1 }, // Count total entries
-              totalWeight: { $sum: '$exercises.weight' } // Calculate total weight
-          }
-      }
-  ];
-
-  const result = await logsCollection.aggregate(aggregationPipeline).toArray();
-  */
-    for (let i = 0; i < logArr.length; i++) {}
-    return logArr;
-  },
 
   async getExcerciseData(arg) {
     if (!arg) {
       console.log("Here");
       return "NA";
     }
+
     let logData = await this.getAll();
     let max = 0;
     let avgRep = 0;
@@ -144,10 +119,10 @@ const exportedMethods = {
         if (exercise.exerciseName === arg) {
           count++;
           if (exercise.weight > max) {
-            max = exercise.weight;
+            max = Number(exercise.weight);
           }
-          avgRep += exercise.sets;
-          avgSet += exercise.reps;
+          avgRep += Number(exercise.sets);
+          avgSet += Number(exercise.reps);
         }
       }
     }
@@ -156,8 +131,8 @@ const exportedMethods = {
       avgRep = 0;
       max = 0;
     } else {
-      avgSet = avgSet / count;
-      avgRep = avgRep / count;
+      avgSet = Math.round(avgSet / count);
+      avgRep = Math.round(avgRep / count);
     }
     return { max: max, avgSet: avgSet, avgRep: avgRep };
   },
