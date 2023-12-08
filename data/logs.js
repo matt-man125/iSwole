@@ -138,91 +138,106 @@ const exportedMethods = {
   },
 
   async getCurrentBodyWeight() {
-    const logCollection = await logs();
-    let logList = await logCollection.find({}).toArray();
-    let numLogs = logList.length;
-    let curWeight = logList[numLogs - 1].info.bodyWeight;
-    return curWeight;
+    try {
+      const logCollection = await logs();
+      let logList = await logCollection.find({}).toArray();
+      console.log("Hello");
+      let numLogs = logList.length;
+      let curWeight = logList[numLogs - 1].info.bodyWeight;
+      return curWeight;
+      return 0;
+    }
   },
 
   async getAverageWorkoutTime() {
-    const logCollection = await logs();
-    let logList = await logCollection.find({}).toArray();
-    let numLogs = logList.length;
-    let totalWorkoutTime = 0;
-    for (let i = 0; i < numLogs; i++) {
-      let curLog = logList[i];
-      let curLogStartTime = curLog.info.startTime.slice(11);
-      let curLogEndTime = curLog.info.endTime.slice(11);
-      let minuteDifference =
-        parseInt(curLogEndTime.slice(3)) - parseInt(curLogStartTime.slice(3));
-      let hourDifference = parseInt(
-        curLogEndTime.slice(0, 2) - parseInt(curLogStartTime.slice(0, 2))
-      );
-      let hoursToMinutes = hourDifference * 60;
-      totalWorkoutTime = totalWorkoutTime + minuteDifference + hoursToMinutes;
+    try {
+      const logCollection = await logs();
+      let logList = await logCollection.find({}).toArray();
+      let numLogs = logList.length;
+      let totalWorkoutTime = 0;
+      for (let i = 0; i < numLogs; i++) {
+        let curLog = logList[i];
+        let curLogStartTime = curLog.info.startTime.slice(11);
+        let curLogEndTime = curLog.info.endTime.slice(11);
+        let minuteDifference =
+          parseInt(curLogEndTime.slice(3)) - parseInt(curLogStartTime.slice(3));
+        let hourDifference = parseInt(
+          curLogEndTime.slice(0, 2) - parseInt(curLogStartTime.slice(0, 2))
+        );
+        let hoursToMinutes = hourDifference * 60;
+        totalWorkoutTime = totalWorkoutTime + minuteDifference + hoursToMinutes;
+      }
+      let averageWorkoutTime = totalWorkoutTime / numLogs;
+      averageWorkoutTime = averageWorkoutTime.toFixed(1);
+      return averageWorkoutTime;
+    } catch (e) {
+      return 0;
     }
-    let averageWorkoutTime = totalWorkoutTime / numLogs;
-    averageWorkoutTime = averageWorkoutTime.toFixed(1);
-    return averageWorkoutTime;
   },
 
   async getAverageWorkoutsPerWeek() {
-    const logCollection = await logs();
-    let logList = await logCollection.find({}).toArray();
-    let numLogs = logList.length;
-    let earliestYear = 3000;
-    let earliestMonth = 12;
-    let earliestDay = 31;
-    let latestYear = 0;
-    let latestMonth = 0;
-    let latestDay = 0;
-    for (let i = 0; i < numLogs; i++) {
-      let curLog = logList[i];
-      let curLogYear = parseInt(curLog.info.startTime.slice(0, 4));
-      let curLogMonth = parseInt(curLog.info.startTime.slice(5, 7));
-      let curLogDay = parseInt(curLog.info.startTime.slice(8, 10));
+    try {
+      const logCollection = await logs();
+      let logList = await logCollection.find({}).toArray();
+      if(logList.length<2){
+        return 1;
+      }
+      let numLogs = logList.length;
+      let earliestYear = 3000;
+      let earliestMonth = 12;
+      let earliestDay = 31;
+      let latestYear = 0;
+      let latestMonth = 0;
+      let latestDay = 0;
+      for (let i = 0; i < numLogs; i++) {
+        let curLog = logList[i];
+        let curLogYear = parseInt(curLog.info.startTime.slice(0, 4));
+        let curLogMonth = parseInt(curLog.info.startTime.slice(5, 7));
+        let curLogDay = parseInt(curLog.info.startTime.slice(8, 10));
 
-      if (curLogYear < earliestYear) {
-        earliestYear = curLogYear;
-        earliestMonth = curLogMonth;
-        earliestDay = curLogDay;
-      } else if (curLogYear == earliestYear) {
-        if (curLogMonth < earliestMonth) {
+        if (curLogYear < earliestYear) {
+          earliestYear = curLogYear;
           earliestMonth = curLogMonth;
           earliestDay = curLogDay;
-        } else if (curLogMonth == earliestMonth) {
-          if (curLogDay < earliestDay) {
+        } else if (curLogYear == earliestYear) {
+          if (curLogMonth < earliestMonth) {
+            earliestMonth = curLogMonth;
             earliestDay = curLogDay;
+          } else if (curLogMonth == earliestMonth) {
+            if (curLogDay < earliestDay) {
+              earliestDay = curLogDay;
+            }
           }
         }
-      }
 
-      if (curLogYear > latestYear) {
-        latestYear = curLogYear;
-        latestMonth = curLogMonth;
-        latestDay = curLogDay;
-      } else if (curLogYear == latestYear) {
-        if (curLogMonth > latestMonth) {
+        if (curLogYear > latestYear) {
+          latestYear = curLogYear;
           latestMonth = curLogMonth;
           latestDay = curLogDay;
-        } else if (curLogMonth == latestMonth) {
-          if (curLogDay > latestDay) {
+        } else if (curLogYear == latestYear) {
+          if (curLogMonth > latestMonth) {
+            latestMonth = curLogMonth;
             latestDay = curLogDay;
+          } else if (curLogMonth == latestMonth) {
+            if (curLogDay > latestDay) {
+              latestDay = curLogDay;
+            }
           }
         }
       }
+      let differenceInYears = latestYear - earliestYear;
+      let differenceInMonths = latestMonth - earliestMonth;
+      let differenceInDays = latestDay - earliestDay;
+      let yearsToWeeks = differenceInYears * 52;
+      let monthsToWeeks = differenceInMonths * 4.33;
+      let daysToWeeks = differenceInDays / 7;
+      let totalWeeks = yearsToWeeks + monthsToWeeks + daysToWeeks;
+      let averageWorkoutsPerWeek = numLogs / totalWeeks;
+      averageWorkoutsPerWeek = averageWorkoutsPerWeek.toFixed(1);
+      return averageWorkoutsPerWeek;
+    } catch (e) {
+      return 0;
     }
-    let differenceInYears = latestYear - earliestYear;
-    let differenceInMonths = latestMonth - earliestMonth;
-    let differenceInDays = latestDay - earliestDay;
-    let yearsToWeeks = differenceInYears * 52;
-    let monthsToWeeks = differenceInMonths * 4.33;
-    let daysToWeeks = differenceInDays / 7;
-    let totalWeeks = yearsToWeeks + monthsToWeeks + daysToWeeks;
-    let averageWorkoutsPerWeek = numLogs / totalWeeks;
-    averageWorkoutsPerWeek = averageWorkoutsPerWeek.toFixed(1);
-    return averageWorkoutsPerWeek;
   },
 
   async remove(logId) {
