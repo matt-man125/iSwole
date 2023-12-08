@@ -146,6 +146,8 @@ const exportedMethods = {
       let curWeight = logList[numLogs - 1].info.bodyWeight;
       return curWeight;
       return 0;
+    } catch (e) {
+      return 0;
     }
   },
 
@@ -179,7 +181,7 @@ const exportedMethods = {
     try {
       const logCollection = await logs();
       let logList = await logCollection.find({}).toArray();
-      if(logList.length<2){
+      if (logList.length === 1) {
         return 1;
       }
       let numLogs = logList.length;
@@ -232,6 +234,9 @@ const exportedMethods = {
       let monthsToWeeks = differenceInMonths * 4.33;
       let daysToWeeks = differenceInDays / 7;
       let totalWeeks = yearsToWeeks + monthsToWeeks + daysToWeeks;
+      if (totalWeeks === 0) {
+        return logList.length;
+      }
       let averageWorkoutsPerWeek = numLogs / totalWeeks;
       averageWorkoutsPerWeek = averageWorkoutsPerWeek.toFixed(1);
       return averageWorkoutsPerWeek;
